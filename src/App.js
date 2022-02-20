@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className="container mt-5">
+      <h1>ToDo アプリ</h1>
       <InputTitle
         title={title}
         onChange={onChangeTitle}
