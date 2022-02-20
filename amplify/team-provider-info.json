@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-masa5221-dev-173847-authRole",
+      "UnauthRoleArn": "arn:aws:iam::654022059136:role/amplify-masa5221-dev-173847-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::654022059136:role/amplify-masa5221-dev-173847-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-masa5221-dev-173847-deployment",
+      "UnauthRoleName": "amplify-masa5221-dev-173847-unauthRole",
+      "StackName": "amplify-masa5221-dev-173847",
+      "StackId": "arn:aws:cloudformation:us-east-1:654022059136:stack/amplify-masa5221-dev-173847/87183320-9228-11ec-9d6d-0a5394b80e4f",
+      "AmplifyAppId": "d2vzwbwa8zeaek"
+    },
+    "categories": {
+      "auth": {
+        "masa522188ee373e": {}
+      }
+    }
+  }
+}

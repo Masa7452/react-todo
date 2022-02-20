@@ -4,7 +4,7 @@ import {InputTodo} from "./components/InputToDo";
 import React, { useState } from "react";
 import { ToDoArea } from './components/ToDoArea';
 import { InputTitle } from './components/InputTitle';
-
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
 function App() {
   const [todoText, setTodoText] = useState("");
@@ -27,7 +27,6 @@ function App() {
       return;
     }
     const newToDo = {"title":title, "content":todoText}
-    console.log(todoText)
     // const newToDo = {}
     const newToDoList = [...todos, newToDo];
     setToDos(newToDoList);
@@ -41,7 +40,6 @@ function App() {
 
   return (
     <div className="container mt-5">
-      <h1>ToDo アプリ</h1>
       <InputTitle
         title={title}
         onChange={onChangeTitle}
@@ -65,10 +63,10 @@ function App() {
             onClickDelete={onClickDelete}
           />
         )
-        
       })}
+      <AmplifySignOut />
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
