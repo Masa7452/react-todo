@@ -1,7 +1,7 @@
 import React from "react"
 
 export const InputTitle = (props) => {
-    const {title, onChange, onClick} = props;
+    const {title, onChange} = props;
     return (
       <>
        <label className="float-left">Title</label>

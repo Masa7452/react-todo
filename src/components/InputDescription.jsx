@@ -1,7 +1,7 @@
 import React from "react"
 
-export const InputTodo = (props) => {
-    const {todoText, onChange, onClick} = props;
+export const InputDescription= (props) => {
+    const {description, onChange} = props;
     return (
       <>
         <label className="float-left">To Do</label>
@@ -10,7 +10,7 @@ export const InputTodo = (props) => {
               type="text"
               className="form-control"
               placeholder="write a task"
-              value= {todoText}
+              value= {description}
               onChange={onChange}
             />
         </div>
