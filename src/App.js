@@ -12,12 +12,7 @@ import { createTodo as createTodoMutation, deleteTodo as deleteTodoMutation } fr
 const initialFormState = { title: '', description: '' }
 
 function App() {
-  
-  async function getLoginUser() {
-    const user = await Auth.currentAuthenticatedUser()
-    console.log(user.username)
-  }
-  getLoginUser()
+
   const [todos, setToDos] = useState([]);
   const [formState, setFormState] = useState(initialFormState);
 

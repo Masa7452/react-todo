@@ -3,7 +3,6 @@ import React from "react";
 
 export const ToDoArea = (props) => {
     const {todos, onClickDelete} = props;
-    console.log(todos)
     return (
       <div>
         {todos.map((row, index) => {
