@@ -15,7 +15,7 @@ function App() {
   
   async function getLoginUser() {
     const user = await Auth.currentAuthenticatedUser()
-    console.log(user)
+    console.log(user.username)
   }
   getLoginUser()
   const [todos, setToDos] = useState([]);
@@ -42,7 +42,7 @@ function App() {
         return;
       }
       if(todos.length === 5){
-        alert("登録できるToDoは5つまでです。増やしすぎは良くないよ！");
+        alert("登録できるToDoは5つまでです。");
         return;
       }
       const newTodo = { ...formState}
@@ -91,8 +91,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App, {
-  signUpConfig: {
-    hiddenDefaults: ['phone_number']
-  }
-});
+export default withAuthenticator(App);
