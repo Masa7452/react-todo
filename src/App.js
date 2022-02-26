@@ -12,6 +12,12 @@ import { createTodo as createTodoMutation, deleteTodo as deleteTodoMutation } fr
 const initialFormState = { title: '', description: '' }
 
 function App() {
+  
+  async function getLoginUser() {
+    const user = await Auth.currentAuthenticatedUser()
+    console.log(user)
+  }
+  getLoginUser()
   const [todos, setToDos] = useState([]);
   const [formState, setFormState] = useState(initialFormState);
 
@@ -81,9 +87,12 @@ function App() {
       <div className="w-50 text-start my-3">
         <AmplifySignOut />
       </div>
-      
     </div>
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, {
+  signUpConfig: {
+    hiddenDefaults: ['phone_number']
+  }
+});
