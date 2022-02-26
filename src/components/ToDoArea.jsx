@@ -1,19 +1,24 @@
 import Button from 'react-bootstrap/Button';
-import React, { useState } from "react";
-
-
+import React from "react";
 
 export const ToDoArea = (props) => {
-    const {id, key, title, description, onClickDelete} = props;
-        return (
-            <div className="card w-50 my-1">
-              <div className="card-body">
-                  <h5 className="card-title">タイトル：{title}</h5>
-                  <p>{description}</p>
-                  <div className="text-end">
-                    <Button onClick={() => onClickDelete(key, id)} variant="success">Delete</Button>
-                  </div>
+    const {todos, onClickDelete} = props;
+    console.log(todos)
+    return (
+      <div>
+        {todos.map((row, index) => {
+            return (
+              <div key={index} className="card w-50 my-1">
+                <div className="card-body">
+                    <h4 className="card-title">{row.title}</h4>
+                    <p>{row.description}</p>
+                    <div className="text-end">
+                      <Button onClick={() => onClickDelete(row.id)} variant="secondary">Delete</Button>
+                    </div>
+                </div>
               </div>
-            </div>
-        )
+            )
+        })}
+      </div>
+    )
 }

@@ -1,11 +1,12 @@
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import {InputDescription} from "./components/InputDescription";
+import { API, Auth } from 'aws-amplify';
 import React, { useState, useEffect } from "react";
 import { ToDoArea } from './components/ToDoArea';
 import { InputTitle } from './components/InputTitle';
 import { listTodos } from './graphql/queries';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import { withAuthenticator, AmplifySignOut  } from '@aws-amplify/ui-react'
 import { createTodo as createTodoMutation, deleteTodo as deleteTodoMutation } from './graphql/mutations';
 
 const initialFormState = { title: '', description: '' }
@@ -24,13 +25,13 @@ function App() {
 
   async function fetchTodos() {
     const apiData = await API.graphql({ query: listTodos });
-    const todos = apiData.data.listTodos.items
-    setToDos(todos)
+    const todoList = apiData.data.listTodos.items
+    setToDos(todoList)
   }
 
   async function createTodo() {
     try {
-      if (!formState.name || !formState.description){
+      if (formState.name == "" || formState.description == ""){
         alert("タイトルとToDoを両方入力してください。");
         return;
       }
@@ -39,23 +40,31 @@ function App() {
         return;
       }
       const newTodo = { ...formState}
-      setTodos([...todos, newTodo])
       setFormState(initialFormState)
       await API.graphql({ query: createTodoMutation, variables: { input: newTodo } });
+
+      // 保存したデータを再取得し、表示
+      const apiData = await API.graphql({ query: listTodos });
+      const todoList = apiData.data.listTodos.items
+      setToDos(todoList)
+    } catch (err) {
+    }
+  }
+
+  async function deleteTodo(id) {
+    try {
+      const newTodos = todos.filter(todo => todo.id !== id);
+      setToDos(newTodos)
+      await API.graphql({ query: deleteTodoMutation, variables: { input: { id } }});
     } catch (err) {
       console.log('error creating todo:', err)
     }
   }
 
-  async function deleteTodo(key, id) {
-    try {
-      const newTodos = [...todos];
-      newTodos.splice(key, 1);
-      setToDos(newTodos);
-      await API.graphql({ query: deleteTodoMutation, variables: { input: { id } }});
-    } catch (err) {
-      console.log('error creating todo:', err)
-    }
+  function signOut() {
+    console.log("通過");
+    Auth.signOut()
+    window.location.reload()
   }
 
   /*　過去作成分
@@ -99,21 +108,17 @@ function App() {
         description={formState.description}
         onChange={event => setInput("description", event.target.value)}
       />
-      <div className="w-50 text-end my-3">
+      <div className="w-50 text-end my-3 mr-3">
         <Button onClick={createTodo} variant="primary">Create</Button>
       </div>
-      {todos.map((row, index) => {
-        return (
-          <ToDoArea
-            key={index}
-            id={row.id}
-            title={row.title}
-            content={row.description}
-            onClickDelete={deleteTodo}
-          />
-        )
-      })}
-      <AmplifySignOut />
+      <ToDoArea
+        todos={todos}
+        onClickDelete={deleteTodo}
+      />
+      <div className="w-50 text-start my-3">
+        <AmplifySignOut />
+      </div>
+      
     </div>
   );
 }
