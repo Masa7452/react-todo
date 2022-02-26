@@ -61,43 +61,6 @@ function App() {
     }
   }
 
-  function signOut() {
-    console.log("通過");
-    Auth.signOut()
-    window.location.reload()
-  }
-
-  /*　過去作成分
-
-  const onChangeTodoText = (event) => setTodoText(event.target.value);
-  const onChangeTitle = (event) => {
-    setTitle(event.target.value);
-
-  }
-
-  const onChangeCreate = () => {
-    if(todoText == "" || title == ""){
-      alert("タイトルとToDoを両方入力してください。");
-      return ;
-    }
-    if(todos.length === 5){
-      alert("登録できるToDoは5つまでです。増やしすぎは良くないよ！");
-      return;
-    }
-    const newToDo = {"title":title, "content":todoText}
-    // const newToDo = {}
-    const newToDoList = [...todos, newToDo];
-    setToDos(newToDoList);
-  }
-  const onClickDelete = (toDoNum) => {
-    const newToDos = [...todos];
-    newToDos.splice(toDoNum, 1);
-    setToDos(newToDos);
-
-  }
-
-  */
-
   return (
     <div className="container mt-5">
       <InputTitle
