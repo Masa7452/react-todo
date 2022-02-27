@@ -27,6 +27,7 @@ function App() {
   async function fetchTodos() {
     const apiData = await API.graphql({ query: listTodos });
     const todoList = apiData.data.listTodos.items
+    console.log(todoList);
     setToDos(todoList)
   }
 
