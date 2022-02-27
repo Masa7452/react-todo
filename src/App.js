@@ -1,7 +1,7 @@
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import {InputDescription} from "./components/InputDescription";
-import { API, Auth } from 'aws-amplify';
+import { API } from 'aws-amplify';
 import React, { useState, useEffect } from "react";
 import { ToDoArea } from './components/ToDoArea';
 import { InputTitle } from './components/InputTitle';
